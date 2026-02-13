@@ -86,7 +86,7 @@ export default function SettingsPage() {
             Add this to the end of your cron job script:
           </p>
           <code className="block text-xs bg-[var(--muted)] px-3 py-2 rounded-md">
-            curl -fsS --retry 3 https://ping.cronpulse.dev/p/YOUR_MONITOR_ID
+            curl -fsS --retry 3 https://ping.pingcron.dev/p/YOUR_MONITOR_ID
           </code>
         </div>
       </div>

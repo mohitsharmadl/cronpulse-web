@@ -189,7 +189,7 @@ export default function LandingPage() {
             </div>
             <div className="pl-4">
               <span className="text-emerald-400">curl -fsS </span>
-              <span className="text-sky-400 underline decoration-sky-400/30">https://ping.cronpulse.dev/p/abc123</span>
+              <span className="text-sky-400 underline decoration-sky-400/30">https://ping.pingcron.dev/p/abc123</span>
             </div>
             <div className="mt-4 text-slate-500"># Email report — daily at 8am</div>
             <div>
@@ -199,7 +199,7 @@ export default function LandingPage() {
             </div>
             <div className="pl-4">
               <span className="text-emerald-400">curl -fsS </span>
-              <span className="text-sky-400 underline decoration-sky-400/30">https://ping.cronpulse.dev/p/def456</span>
+              <span className="text-sky-400 underline decoration-sky-400/30">https://ping.pingcron.dev/p/def456</span>
             </div>
           </div>
         </div>

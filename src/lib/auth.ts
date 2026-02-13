@@ -12,7 +12,7 @@ export const authOptions: NextAuthOptions = {
           pass: process.env.EMAIL_SERVER_PASSWORD || process.env.RESEND_API_KEY || "",
         },
       },
-      from: process.env.EMAIL_FROM || "noreply@cronpulse.dev",
+      from: process.env.EMAIL_FROM || "noreply@pingcron.dev",
     }),
   ],
   pages: {
