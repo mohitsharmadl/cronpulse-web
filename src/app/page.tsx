@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import {
-  Zap,
+  Activity,
   Bell,
   Clock,
   Shield,
@@ -10,44 +10,46 @@ import {
   Terminal,
   CheckCircle,
   ArrowRight,
+  Zap,
+  BarChart3,
 } from "lucide-react";
 
 const features = [
   {
-    icon: Clock,
-    title: "Heartbeat Monitoring",
+    icon: Terminal,
+    title: "One-Line Setup",
     description:
-      "Your cron jobs ping CronPulse when they run. If a ping doesn't arrive on time, we alert you instantly.",
+      "Add a single curl to your cron script. No agents, no SDKs, no config files.",
   },
   {
     icon: Bell,
-    title: "Multi-Channel Alerts",
+    title: "Email, Telegram, Slack, Webhook",
     description:
-      "Get notified via Email, Telegram, Slack, or Webhooks. Never miss a failed cron job again.",
+      "Get alerted wherever you are. Four channels out of the box, configure in seconds.",
   },
   {
     icon: Globe,
     title: "Public Status Pages",
     description:
-      "Share your system uptime with customers via beautiful, auto-updating status pages.",
+      "Share uptime with your team or customers. Auto-updating, no maintenance required.",
   },
   {
     icon: Shield,
-    title: "Grace Periods",
+    title: "Smart Grace Periods",
     description:
-      "Set custom grace periods per monitor to avoid false alarms from slow-running jobs.",
-  },
-  {
-    icon: Terminal,
-    title: "Dead Simple Setup",
-    description:
-      'Add one line to your cron script: curl https://ping.cronpulse.dev/p/YOUR_ID. That\'s it.',
+      "Set custom buffers per monitor. No false alarms from slow-running jobs.",
   },
   {
     icon: Zap,
-    title: "Fast & Reliable",
+    title: "Sub-10ms Response",
     description:
-      "Built with Go for sub-10ms ping responses. Your monitoring should never be the bottleneck.",
+      "Go-powered backend. Your monitoring ping returns faster than a database query.",
+  },
+  {
+    icon: BarChart3,
+    title: "Ping History & Incidents",
+    description:
+      "Full timeline of every heartbeat. See when things broke and how long they were down.",
   },
 ];
 
@@ -63,13 +65,13 @@ const tiers = [
       "2 alert channels",
       "1 status page",
     ],
-    cta: "Get Started",
+    cta: "Get Started Free",
     highlighted: false,
   },
   {
     name: "Pro",
     price: "$9",
-    period: "/month",
+    period: "/mo",
     features: [
       "50 monitors",
       "30s minimum interval",
@@ -78,99 +80,160 @@ const tiers = [
       "5 status pages",
       "1 year incident history",
     ],
-    cta: "Start Free Trial",
+    cta: "Start Pro Trial",
     highlighted: true,
   },
 ];
 
 export default function LandingPage() {
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen" style={{ background: 'var(--background)' }}>
       {/* Nav */}
-      <nav className="flex items-center justify-between px-6 py-4 max-w-6xl mx-auto">
-        <div className="flex items-center gap-2">
-          <Zap className="w-6 h-6 text-[var(--primary)]" />
-          <span className="font-bold text-xl">CronPulse</span>
+      <nav className="flex items-center justify-between px-6 py-5 max-w-6xl mx-auto">
+        <div className="flex items-center gap-2.5">
+          <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ background: 'var(--primary)' }}>
+            <Activity className="w-4 h-4 text-white" />
+          </div>
+          <span className="font-bold text-lg tracking-tight" style={{ color: 'var(--foreground)' }}>CronPulse</span>
         </div>
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-3">
           <Link
             href="/login"
-            className="text-sm text-[var(--muted-foreground)] hover:text-[var(--foreground)]"
+            className="text-sm font-medium px-3 py-2 rounded-lg transition-colors hover:opacity-80"
+            style={{ color: 'var(--muted-foreground)' }}
           >
-            Sign In
+            Log In
           </Link>
           <Link
             href="/login"
-            className="px-4 py-2 bg-[var(--primary)] text-[var(--primary-foreground)] rounded-md text-sm font-medium hover:opacity-90"
+            className="px-4 py-2 rounded-lg text-sm font-medium transition-opacity hover:opacity-90"
+            style={{ background: 'var(--primary)', color: 'var(--primary-foreground)' }}
           >
-            Get Started
+            Sign Up
           </Link>
         </div>
       </nav>
 
       {/* Hero */}
-      <section className="text-center px-6 py-24 max-w-3xl mx-auto">
-        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[var(--primary)]/10 text-[var(--primary)] text-xs font-medium mb-6">
-          <Zap className="w-3 h-3" />
-          Dead man&apos;s switch for your cron jobs
-        </div>
-        <h1 className="text-5xl font-bold tracking-tight mb-6">
-          Know instantly when your{" "}
-          <span className="text-[var(--primary)]">cron jobs</span> stop running
-        </h1>
-        <p className="text-lg text-[var(--muted-foreground)] mb-8 max-w-xl mx-auto">
-          CronPulse monitors your scheduled tasks with heartbeat pings. If your
-          cron job doesn&apos;t check in on time, we alert you via Email,
-          Telegram, Slack, or Webhook.
-        </p>
-        <div className="flex items-center justify-center gap-4">
-          <Link
-            href="/login"
-            className="px-6 py-3 bg-[var(--primary)] text-[var(--primary-foreground)] rounded-md text-sm font-medium hover:opacity-90 flex items-center gap-2"
-          >
-            Start Monitoring Free
-            <ArrowRight className="w-4 h-4" />
-          </Link>
+      <section className="px-6 pt-20 pb-24 max-w-4xl mx-auto text-center">
+        <div
+          className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium mb-8 border"
+          style={{ background: 'var(--primary-muted)', color: 'var(--primary)', borderColor: 'var(--primary)' }}
+        >
+          <Activity className="w-3 h-3" />
+          Heartbeat monitoring for cron jobs
         </div>
 
-        {/* Code snippet */}
-        <div className="mt-12 p-4 rounded-lg bg-[var(--muted)] border border-[var(--border)] text-left max-w-md mx-auto">
-          <div className="text-xs text-[var(--muted-foreground)] mb-2">
-            # Add to the end of your cron script
+        <h1
+          className="text-[3.25rem] leading-[1.1] font-extrabold tracking-tight mb-6"
+          style={{ color: 'var(--foreground)' }}
+        >
+          Your cron jobs called.
+          <br />
+          <span style={{ color: 'var(--primary)' }}>They didn&apos;t check in.</span>
+        </h1>
+
+        <p className="text-lg mb-10 max-w-xl mx-auto leading-relaxed" style={{ color: 'var(--muted-foreground)' }}>
+          CronPulse watches your scheduled tasks. If a job doesn&apos;t ping us
+          on time, we alert you before your users notice.
+        </p>
+
+        <div className="flex items-center justify-center gap-3 mb-16">
+          <Link
+            href="/login"
+            className="px-7 py-3 rounded-lg text-sm font-semibold flex items-center gap-2 transition-opacity hover:opacity-90"
+            style={{ background: 'var(--primary)', color: 'var(--primary-foreground)' }}
+          >
+            Start Monitoring
+            <ArrowRight className="w-4 h-4" />
+          </Link>
+          <a
+            href="#how-it-works"
+            className="px-7 py-3 rounded-lg text-sm font-semibold border transition-colors hover:opacity-80"
+            style={{ borderColor: 'var(--border)', color: 'var(--foreground)' }}
+          >
+            How It Works
+          </a>
+        </div>
+
+        {/* Terminal Demo */}
+        <div className="max-w-lg mx-auto rounded-xl overflow-hidden shadow-2xl border" style={{ borderColor: 'var(--border)' }}>
+          <div className="flex items-center gap-2 px-4 py-3" style={{ background: '#1e1e2e' }}>
+            <div className="w-3 h-3 rounded-full bg-red-400" />
+            <div className="w-3 h-3 rounded-full bg-amber-400" />
+            <div className="w-3 h-3 rounded-full bg-emerald-400" />
+            <span className="ml-2 text-xs text-slate-500 font-mono">crontab -e</span>
           </div>
-          <code className="text-sm text-[var(--primary)]">
-            curl -fsS https://ping.cronpulse.dev/p/abc123
-          </code>
+          <div className="px-5 py-4 text-left font-mono text-[13px] leading-relaxed" style={{ background: '#11111b' }}>
+            <div className="text-slate-500"># Database backup — every 6 hours</div>
+            <div>
+              <span className="text-amber-400">0 */6 * * *</span>
+              <span className="text-slate-300"> /opt/scripts/backup.sh</span>
+              <span className="text-emerald-400"> && \</span>
+            </div>
+            <div className="pl-4">
+              <span className="text-emerald-400">curl -fsS </span>
+              <span className="text-sky-400 underline decoration-sky-400/30">https://ping.cronpulse.dev/p/abc123</span>
+            </div>
+            <div className="mt-4 text-slate-500"># Email report — daily at 8am</div>
+            <div>
+              <span className="text-amber-400">0 8 * * *</span>
+              <span className="text-slate-300"> python3 report.py</span>
+              <span className="text-emerald-400"> && \</span>
+            </div>
+            <div className="pl-4">
+              <span className="text-emerald-400">curl -fsS </span>
+              <span className="text-sky-400 underline decoration-sky-400/30">https://ping.cronpulse.dev/p/def456</span>
+            </div>
+          </div>
         </div>
       </section>
 
       {/* How it works */}
-      <section className="px-6 py-16 max-w-4xl mx-auto">
-        <h2 className="text-3xl font-bold text-center mb-12">How It Works</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <section id="how-it-works" className="px-6 py-20 max-w-4xl mx-auto">
+        <h2 className="text-3xl font-bold text-center mb-4 tracking-tight" style={{ color: 'var(--foreground)' }}>
+          Three steps. Zero complexity.
+        </h2>
+        <p className="text-center mb-14 text-sm" style={{ color: 'var(--muted-foreground)' }}>
+          Set up monitoring in under a minute.
+        </p>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {[
             {
               step: "1",
-              title: "Create a Monitor",
-              desc: "Set the expected schedule (every 5 min, daily at 6am, etc.) and a grace period.",
+              title: "Create a monitor",
+              desc: "Pick a name and schedule — every 5 minutes, hourly, daily. Set a grace period for slow jobs.",
+              color: "#10b981",
             },
             {
               step: "2",
-              title: "Add the Ping",
-              desc: "Put the curl command at the end of your cron script. It takes 2 seconds.",
+              title: "Add the ping",
+              desc: "Append one curl command to your cron script. It takes literally 10 seconds.",
+              color: "#6366f1",
             },
             {
               step: "3",
-              title: "Get Alerted",
-              desc: "If the ping doesn't arrive on time, you get notified instantly. Sleep easy.",
+              title: "Sleep easy",
+              desc: "If the ping doesn't arrive on time, you get an alert on your phone. We've got your back.",
+              color: "#f59e0b",
             },
           ].map((item) => (
-            <div key={item.step} className="text-center">
-              <div className="w-10 h-10 rounded-full bg-[var(--primary)] text-[var(--primary-foreground)] flex items-center justify-center text-sm font-bold mx-auto mb-3">
+            <div
+              key={item.step}
+              className="rounded-xl border p-6"
+              style={{ background: 'var(--card)', borderColor: 'var(--border)' }}
+            >
+              <div
+                className="w-9 h-9 rounded-lg flex items-center justify-center text-sm font-bold text-white mb-4"
+                style={{ background: item.color }}
+              >
                 {item.step}
               </div>
-              <h3 className="font-semibold mb-2">{item.title}</h3>
-              <p className="text-sm text-[var(--muted-foreground)]">
+              <h3 className="font-semibold mb-2" style={{ color: 'var(--foreground)' }}>
+                {item.title}
+              </h3>
+              <p className="text-sm leading-relaxed" style={{ color: 'var(--muted-foreground)' }}>
                 {item.desc}
               </p>
             </div>
@@ -179,22 +242,33 @@ export default function LandingPage() {
       </section>
 
       {/* Features */}
-      <section className="px-6 py-16 bg-[var(--muted)]">
+      <section className="px-6 py-20" style={{ background: 'var(--muted)' }}>
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl font-bold text-center mb-12">Features</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <h2 className="text-3xl font-bold text-center mb-4 tracking-tight" style={{ color: 'var(--foreground)' }}>
+            Everything you need
+          </h2>
+          <p className="text-center mb-14 text-sm" style={{ color: 'var(--muted-foreground)' }}>
+            No bloat. Just the features that matter for cron job monitoring.
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
             {features.map((feature) => {
               const Icon = feature.icon;
               return (
                 <div
                   key={feature.title}
-                  className="p-5 rounded-lg bg-[var(--background)] border border-[var(--border)]"
+                  className="rounded-xl border p-5"
+                  style={{ background: 'var(--card)', borderColor: 'var(--border)' }}
                 >
-                  <Icon className="w-5 h-5 text-[var(--primary)] mb-3" />
-                  <h3 className="font-semibold text-sm mb-1.5">
+                  <div
+                    className="w-9 h-9 rounded-lg flex items-center justify-center mb-3"
+                    style={{ background: 'var(--primary-muted)' }}
+                  >
+                    <Icon className="w-[18px] h-[18px]" style={{ color: 'var(--primary)' }} />
+                  </div>
+                  <h3 className="font-semibold text-sm mb-1.5" style={{ color: 'var(--foreground)' }}>
                     {feature.title}
                   </h3>
-                  <p className="text-xs text-[var(--muted-foreground)]">
+                  <p className="text-xs leading-relaxed" style={{ color: 'var(--muted-foreground)' }}>
                     {feature.description}
                   </p>
                 </div>
@@ -205,43 +279,55 @@ export default function LandingPage() {
       </section>
 
       {/* Pricing */}
-      <section className="px-6 py-16 max-w-4xl mx-auto">
-        <h2 className="text-3xl font-bold text-center mb-4">Pricing</h2>
-        <p className="text-center text-[var(--muted-foreground)] mb-12">
-          Start free. Upgrade when you need more.
+      <section className="px-6 py-20 max-w-4xl mx-auto">
+        <h2 className="text-3xl font-bold text-center mb-4 tracking-tight" style={{ color: 'var(--foreground)' }}>
+          Simple pricing
+        </h2>
+        <p className="text-center mb-14 text-sm" style={{ color: 'var(--muted-foreground)' }}>
+          Start free. Upgrade when you outgrow it.
         </p>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-2xl mx-auto">
           {tiers.map((tier) => (
             <div
               key={tier.name}
-              className={`p-6 rounded-lg border ${
-                tier.highlighted
-                  ? "border-[var(--primary)] ring-2 ring-[var(--primary)]/20"
-                  : "border-[var(--border)]"
-              }`}
+              className="rounded-xl border p-7"
+              style={{
+                background: 'var(--card)',
+                borderColor: tier.highlighted ? 'var(--primary)' : 'var(--border)',
+                boxShadow: tier.highlighted ? '0 0 0 1px var(--primary)' : undefined,
+              }}
             >
-              <h3 className="font-semibold text-lg">{tier.name}</h3>
-              <div className="mt-2 mb-4">
-                <span className="text-3xl font-bold">{tier.price}</span>
-                <span className="text-[var(--muted-foreground)] text-sm">
+              {tier.highlighted && (
+                <span
+                  className="inline-block text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-full mb-4"
+                  style={{ background: 'var(--primary-muted)', color: 'var(--primary)' }}
+                >
+                  Most Popular
+                </span>
+              )}
+              <h3 className="font-bold text-lg" style={{ color: 'var(--foreground)' }}>{tier.name}</h3>
+              <div className="mt-2 mb-5">
+                <span className="text-4xl font-extrabold" style={{ color: 'var(--foreground)' }}>{tier.price}</span>
+                <span className="text-sm ml-1" style={{ color: 'var(--muted-foreground)' }}>
                   {tier.period}
                 </span>
               </div>
-              <ul className="space-y-2 mb-6">
+              <ul className="space-y-2.5 mb-7">
                 {tier.features.map((f) => (
-                  <li key={f} className="flex items-center gap-2 text-sm">
-                    <CheckCircle className="w-4 h-4 text-green-500 flex-shrink-0" />
+                  <li key={f} className="flex items-center gap-2.5 text-sm" style={{ color: 'var(--foreground)' }}>
+                    <CheckCircle className="w-4 h-4 flex-shrink-0" style={{ color: 'var(--primary)' }} />
                     {f}
                   </li>
                 ))}
               </ul>
               <Link
                 href="/login"
-                className={`block text-center px-4 py-2.5 rounded-md text-sm font-medium ${
+                className="block text-center px-4 py-2.5 rounded-lg text-sm font-semibold transition-opacity hover:opacity-90"
+                style={
                   tier.highlighted
-                    ? "bg-[var(--primary)] text-[var(--primary-foreground)]"
-                    : "border border-[var(--border)] hover:bg-[var(--muted)]"
-                }`}
+                    ? { background: 'var(--primary)', color: 'var(--primary-foreground)' }
+                    : { border: '1px solid var(--border)', color: 'var(--foreground)' }
+                }
               >
                 {tier.cta}
               </Link>
@@ -250,14 +336,38 @@ export default function LandingPage() {
         </div>
       </section>
 
+      {/* CTA */}
+      <section className="px-6 py-16">
+        <div
+          className="max-w-3xl mx-auto rounded-2xl p-12 text-center"
+          style={{ background: 'var(--sidebar)', color: 'var(--sidebar-foreground)' }}
+        >
+          <Activity className="w-8 h-8 mx-auto mb-4" style={{ color: 'var(--primary)' }} />
+          <h2 className="text-2xl font-bold mb-3 text-white">
+            Stop finding out from your users.
+          </h2>
+          <p className="text-sm mb-8" style={{ color: 'var(--sidebar-foreground)' }}>
+            Set up your first monitor in 60 seconds. Free forever for up to 5 cron jobs.
+          </p>
+          <Link
+            href="/login"
+            className="inline-flex items-center gap-2 px-8 py-3 rounded-lg text-sm font-semibold transition-opacity hover:opacity-90"
+            style={{ background: 'var(--primary)', color: 'var(--primary-foreground)' }}
+          >
+            Get Started Free
+            <ArrowRight className="w-4 h-4" />
+          </Link>
+        </div>
+      </section>
+
       {/* Footer */}
-      <footer className="px-6 py-8 border-t border-[var(--border)]">
-        <div className="max-w-4xl mx-auto flex items-center justify-between text-xs text-[var(--muted-foreground)]">
-          <div className="flex items-center gap-1.5">
-            <Zap className="w-4 h-4" />
-            CronPulse
+      <footer className="px-6 py-8" style={{ borderTop: '1px solid var(--border)' }}>
+        <div className="max-w-4xl mx-auto flex items-center justify-between text-xs" style={{ color: 'var(--muted-foreground)' }}>
+          <div className="flex items-center gap-2">
+            <Activity className="w-3.5 h-3.5" style={{ color: 'var(--primary)' }} />
+            <span className="font-semibold" style={{ color: 'var(--foreground)' }}>CronPulse</span>
           </div>
-          <p>&copy; {new Date().getFullYear()} CronPulse. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} CronPulse</p>
         </div>
       </footer>
     </div>

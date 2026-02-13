@@ -34,25 +34,12 @@ export function timeAgo(dateStr: string | null) {
 export function statusColor(status: string) {
   switch (status) {
     case "up":
-      return "bg-green-500";
+      return "bg-emerald-500";
     case "down":
       return "bg-red-500";
     case "paused":
-      return "bg-yellow-500";
+      return "bg-amber-500";
     default:
-      return "bg-gray-400";
-  }
-}
-
-export function statusBgColor(status: string) {
-  switch (status) {
-    case "up":
-      return "bg-green-50 border-green-200 dark:bg-green-950 dark:border-green-800";
-    case "down":
-      return "bg-red-50 border-red-200 dark:bg-red-950 dark:border-red-800";
-    case "paused":
-      return "bg-yellow-50 border-yellow-200 dark:bg-yellow-950 dark:border-yellow-800";
-    default:
-      return "bg-gray-50 border-gray-200 dark:bg-gray-900 dark:border-gray-700";
+      return "bg-slate-400";
   }
 }

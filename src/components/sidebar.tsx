@@ -11,7 +11,7 @@ import {
   Globe,
   Settings,
   LogOut,
-  Zap,
+  Activity,
 } from "lucide-react";
 
 const navItems = [
@@ -32,15 +32,25 @@ export function Sidebar() {
   };
 
   return (
-    <aside className="w-56 border-r border-[var(--border)] h-screen flex flex-col bg-[var(--background)]">
-      <div className="p-4 border-b border-[var(--border)]">
-        <Link href="/dashboard" className="flex items-center gap-2">
-          <Zap className="w-5 h-5 text-[var(--primary)]" />
-          <span className="font-bold text-lg">CronPulse</span>
+    <aside className="w-60 h-screen flex flex-col" style={{ background: 'var(--sidebar)', color: 'var(--sidebar-foreground)' }}>
+      {/* Logo */}
+      <div className="px-5 py-5" style={{ borderBottom: '1px solid var(--sidebar-border)' }}>
+        <Link href="/dashboard" className="flex items-center gap-2.5">
+          <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ background: 'var(--primary)' }}>
+            <Activity className="w-4.5 h-4.5 text-white" />
+          </div>
+          <div>
+            <span className="font-bold text-[15px] tracking-tight text-white">CronPulse</span>
+            <span className="block text-[10px] tracking-widest uppercase" style={{ color: 'var(--primary)' }}>MONITORING</span>
+          </div>
         </Link>
       </div>
 
-      <nav className="flex-1 p-3 space-y-1">
+      {/* Nav */}
+      <nav className="flex-1 px-3 py-4 space-y-0.5">
+        <span className="block px-3 mb-2 text-[10px] font-semibold uppercase tracking-widest" style={{ color: 'var(--sidebar-border)' }}>
+          Menu
+        </span>
         {navItems.map((item) => {
           const Icon = item.icon;
           const isActive =
@@ -50,25 +60,35 @@ export function Sidebar() {
               key={item.href}
               href={item.href}
               className={cn(
-                "flex items-center gap-2.5 px-3 py-2 rounded-md text-sm transition-colors",
+                "flex items-center gap-2.5 px-3 py-2 rounded-lg text-[13px] font-medium transition-all duration-150",
                 isActive
-                  ? "bg-[var(--primary)] text-[var(--primary-foreground)]"
-                  : "text-[var(--muted-foreground)] hover:bg-[var(--muted)] hover:text-[var(--foreground)]"
+                  ? "text-white"
+                  : "hover:text-white"
               )}
+              style={
+                isActive
+                  ? { background: 'var(--sidebar-muted)', color: 'var(--sidebar-active)' }
+                  : { color: 'var(--sidebar-foreground)' }
+              }
             >
-              <Icon className="w-4 h-4" />
+              <Icon className="w-[18px] h-[18px]" style={isActive ? { color: 'var(--sidebar-active)' } : undefined} />
               {item.label}
+              {isActive && (
+                <div className="ml-auto w-1.5 h-1.5 rounded-full" style={{ background: 'var(--sidebar-active)' }} />
+              )}
             </Link>
           );
         })}
       </nav>
 
-      <div className="p-3 border-t border-[var(--border)]">
+      {/* Footer */}
+      <div className="px-3 py-3" style={{ borderTop: '1px solid var(--sidebar-border)' }}>
         <button
           onClick={handleLogout}
-          className="flex items-center gap-2.5 px-3 py-2 rounded-md text-sm w-full text-[var(--muted-foreground)] hover:bg-[var(--muted)] hover:text-[var(--foreground)] transition-colors"
+          className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-[13px] w-full transition-colors hover:text-white"
+          style={{ color: 'var(--sidebar-foreground)' }}
         >
-          <LogOut className="w-4 h-4" />
+          <LogOut className="w-[18px] h-[18px]" />
           Log Out
         </button>
       </div>

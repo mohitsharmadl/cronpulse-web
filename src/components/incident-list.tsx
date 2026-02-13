@@ -7,38 +7,47 @@ import { AlertTriangle, CheckCircle } from "lucide-react";
 export function IncidentList({ incidents }: { incidents: Incident[] }) {
   if (incidents.length === 0) {
     return (
-      <div className="text-center text-[var(--muted-foreground)] text-sm py-8">
-        No incidents recorded.
+      <div
+        className="text-center py-10 rounded-xl border"
+        style={{ background: 'var(--card)', borderColor: 'var(--border)' }}
+      >
+        <CheckCircle className="w-8 h-8 mx-auto mb-2" style={{ color: 'var(--primary)' }} />
+        <p className="text-sm font-medium" style={{ color: 'var(--foreground)' }}>No incidents</p>
+        <p className="text-xs mt-1" style={{ color: 'var(--muted-foreground)' }}>Everything has been running smoothly.</p>
       </div>
     );
   }
 
   return (
-    <div className="space-y-3">
+    <div className="space-y-2">
       {incidents.map((incident) => (
         <div
           key={incident.id}
-          className={`flex items-start gap-3 p-3 rounded-lg border ${
-            incident.resolved_at
-              ? "bg-green-50 border-green-200 dark:bg-green-950 dark:border-green-800"
-              : "bg-red-50 border-red-200 dark:bg-red-950 dark:border-red-800"
-          }`}
+          className="flex items-start gap-3 p-4 rounded-xl border"
+          style={{ background: 'var(--card)', borderColor: 'var(--border)' }}
         >
           {incident.resolved_at ? (
-            <CheckCircle className="w-4 h-4 text-green-500 mt-0.5 flex-shrink-0" />
+            <div className="w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0 bg-emerald-500/10">
+              <CheckCircle className="w-4 h-4 text-emerald-500" />
+            </div>
           ) : (
-            <AlertTriangle className="w-4 h-4 text-red-500 mt-0.5 flex-shrink-0" />
+            <div className="w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0 bg-red-500/10">
+              <AlertTriangle className="w-4 h-4 text-red-500" />
+            </div>
           )}
           <div className="flex-1 min-w-0">
             <div className="flex items-center justify-between gap-2">
-              <span className="text-sm font-medium">
-                {incident.monitor_name || "Monitor down"}
+              <span className="text-sm font-medium" style={{ color: 'var(--foreground)' }}>
+                {incident.monitor_name || (incident.resolved_at ? "Resolved" : "Monitor down")}
               </span>
-              <span className="text-xs text-[var(--muted-foreground)]">
+              <span
+                className="text-xs font-mono px-2 py-0.5 rounded"
+                style={{ background: 'var(--muted)', color: 'var(--muted-foreground)' }}
+              >
                 {formatDuration(incident.duration_secs)}
               </span>
             </div>
-            <div className="text-xs text-[var(--muted-foreground)] mt-1">
+            <div className="text-xs mt-1" style={{ color: 'var(--muted-foreground)' }}>
               Started: {formatDate(incident.started_at)}
               {incident.resolved_at && (
                 <> &middot; Resolved: {formatDate(incident.resolved_at)}</>

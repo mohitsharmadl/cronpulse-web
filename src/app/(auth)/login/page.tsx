@@ -3,7 +3,7 @@
 import { Suspense, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { syncUser } from "@/lib/api";
-import { Zap } from "lucide-react";
+import { Activity } from "lucide-react";
 
 function LoginForm() {
   const router = useRouter();
@@ -21,8 +21,6 @@ function LoginForm() {
     setError("");
 
     try {
-      // For now, sync the user directly and get an API key
-      // In production, this would go through NextAuth magic link flow
       const userId = email.replace(/[^a-z0-9]/gi, "-").toLowerCase();
       const result = await syncUser({
         id: userId,
@@ -40,67 +38,79 @@ function LoginForm() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-4">
+    <div className="min-h-screen flex items-center justify-center px-4" style={{ background: 'var(--background)' }}>
       <div className="w-full max-w-sm">
         <div className="text-center mb-8">
-          <div className="flex items-center justify-center gap-2 mb-2">
-            <Zap className="w-8 h-8 text-[var(--primary)]" />
-            <h1 className="text-3xl font-bold">CronPulse</h1>
+          <div className="flex items-center justify-center gap-2.5 mb-3">
+            <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ background: 'var(--primary)' }}>
+              <Activity className="w-5 h-5 text-white" />
+            </div>
           </div>
-          <p className="text-[var(--muted-foreground)] text-sm">
-            Monitor your cron jobs. Get alerted when they fail.
+          <h1 className="text-2xl font-bold tracking-tight" style={{ color: 'var(--foreground)' }}>
+            Welcome to CronPulse
+          </h1>
+          <p className="text-sm mt-1.5" style={{ color: 'var(--muted-foreground)' }}>
+            Sign in to monitor your cron jobs
           </p>
         </div>
 
         {verified && (
-          <div className="bg-green-50 dark:bg-green-950 border border-green-200 dark:border-green-800 text-green-700 dark:text-green-300 px-4 py-3 rounded-md mb-4 text-sm text-center">
+          <div className="border px-4 py-3 rounded-lg mb-4 text-sm text-center" style={{ background: 'var(--primary-muted)', borderColor: 'var(--primary)', color: 'var(--primary)' }}>
             Check your email for a sign-in link!
           </div>
         )}
 
         <form
           onSubmit={handleLogin}
-          className="space-y-4 p-6 rounded-lg border border-[var(--border)]"
+          className="space-y-4 p-6 rounded-xl border"
+          style={{ background: 'var(--card)', borderColor: 'var(--border)' }}
         >
           {error && (
-            <div className="bg-red-50 dark:bg-red-950 border border-red-200 dark:border-red-800 text-red-700 dark:text-red-300 px-4 py-3 rounded-md text-sm">
+            <div className="border px-4 py-3 rounded-lg text-sm" style={{ background: '#fef2f2', borderColor: '#fecaca', color: '#dc2626' }}>
               {error}
             </div>
           )}
 
           <div>
-            <label className="block text-sm font-medium mb-1.5">Email</label>
+            <label className="block text-sm font-medium mb-1.5" style={{ color: 'var(--foreground)' }}>Email</label>
             <input
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="you@example.com"
-              className="w-full px-3 py-2 rounded-md border border-[var(--border)] bg-[var(--background)] text-sm focus:outline-none focus:ring-2 focus:ring-[var(--primary)]"
+              className="w-full px-3.5 py-2.5 rounded-lg border text-sm transition-all focus:outline-none focus:ring-2"
+              style={{ borderColor: 'var(--border)', background: 'var(--background)', color: 'var(--foreground)' }}
               required
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium mb-1.5">
-              Name <span className="text-[var(--muted-foreground)]">(optional)</span>
+            <label className="block text-sm font-medium mb-1.5" style={{ color: 'var(--foreground)' }}>
+              Name <span style={{ color: 'var(--muted-foreground)' }}>(optional)</span>
             </label>
             <input
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              placeholder="Mohit"
-              className="w-full px-3 py-2 rounded-md border border-[var(--border)] bg-[var(--background)] text-sm focus:outline-none focus:ring-2 focus:ring-[var(--primary)]"
+              placeholder="Your name"
+              className="w-full px-3.5 py-2.5 rounded-lg border text-sm transition-all focus:outline-none focus:ring-2"
+              style={{ borderColor: 'var(--border)', background: 'var(--background)', color: 'var(--foreground)' }}
             />
           </div>
 
           <button
             type="submit"
             disabled={loading || !email}
-            className="w-full px-4 py-2.5 bg-[var(--primary)] text-[var(--primary-foreground)] rounded-md text-sm font-medium hover:opacity-90 transition-opacity disabled:opacity-50"
+            className="w-full px-4 py-2.5 rounded-lg text-sm font-semibold transition-opacity hover:opacity-90 disabled:opacity-50"
+            style={{ background: 'var(--primary)', color: 'var(--primary-foreground)' }}
           >
             {loading ? "Signing in..." : "Sign In"}
           </button>
         </form>
+
+        <p className="text-center text-xs mt-4" style={{ color: 'var(--muted-foreground)' }}>
+          No password required. We&apos;ll create your account instantly.
+        </p>
       </div>
     </div>
   );
