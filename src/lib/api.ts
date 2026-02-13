@@ -5,7 +5,7 @@ async function fetchAPI<T>(
   options: RequestInit = {}
 ): Promise<T> {
   const apiKey =
-    typeof window !== "undefined" ? localStorage.getItem("cronpulse_api_key") : null;
+    typeof window !== "undefined" ? localStorage.getItem("pingcron_api_key") : null;
 
   const headers: Record<string, string> = {
     "Content-Type": "application/json",

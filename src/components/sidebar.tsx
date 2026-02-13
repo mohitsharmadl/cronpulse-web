@@ -30,7 +30,7 @@ function SidebarContent({ onNavigate }: { onNavigate?: () => void }) {
   const pathname = usePathname();
 
   const handleLogout = () => {
-    localStorage.removeItem("cronpulse_api_key");
+    localStorage.removeItem("pingcron_api_key");
     window.location.href = "/login";
   };
 

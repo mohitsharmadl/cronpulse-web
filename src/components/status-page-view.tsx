@@ -44,7 +44,7 @@ export function StatusPageView({ data }: { data: StatusPagePublic }) {
       </div>
 
       <div className="text-center mt-10 text-xs" style={{ color: 'var(--muted-foreground)' }}>
-        Powered by <span className="font-semibold" style={{ color: 'var(--primary)' }}>CronPulse</span>
+        Powered by <span className="font-semibold" style={{ color: 'var(--primary)' }}>PingCron</span>
       </div>
     </div>
   );

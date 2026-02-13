@@ -13,7 +13,7 @@ export default function DashboardLayout({
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
-    const key = localStorage.getItem("cronpulse_api_key");
+    const key = localStorage.getItem("pingcron_api_key");
     if (!key) {
       router.push("/login");
     } else {

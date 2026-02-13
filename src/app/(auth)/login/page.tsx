@@ -28,7 +28,7 @@ function LoginForm() {
         name: name || email.split("@")[0],
       });
 
-      localStorage.setItem("cronpulse_api_key", result.api_key);
+      localStorage.setItem("pingcron_api_key", result.api_key);
       router.push("/dashboard");
     } catch (err: unknown) {
       setError(err instanceof Error ? err.message : "Login failed");
@@ -47,7 +47,7 @@ function LoginForm() {
             </div>
           </div>
           <h1 className="text-2xl font-bold tracking-tight" style={{ color: 'var(--foreground)' }}>
-            Welcome to CronPulse
+            Welcome to PingCron
           </h1>
           <p className="text-sm mt-1.5" style={{ color: 'var(--muted-foreground)' }}>
             Sign in to monitor your cron jobs

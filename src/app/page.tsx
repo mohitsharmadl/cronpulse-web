@@ -110,7 +110,7 @@ export default function LandingPage() {
           <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ background: 'var(--primary)' }}>
             <Activity className="w-4 h-4 text-white" />
           </div>
-          <span className="font-bold text-lg tracking-tight" style={{ color: 'var(--foreground)' }}>CronPulse</span>
+          <span className="font-bold text-lg tracking-tight" style={{ color: 'var(--foreground)' }}>PingCron</span>
         </div>
         <div className="flex items-center gap-3">
           <Link
@@ -150,7 +150,7 @@ export default function LandingPage() {
         </h1>
 
         <p className="text-lg mb-10 max-w-xl mx-auto leading-relaxed" style={{ color: 'var(--muted-foreground)' }}>
-          CronPulse watches your scheduled tasks. If a job doesn&apos;t ping us
+          PingCron watches your scheduled tasks. If a job doesn&apos;t ping us
           on time, we alert you before your users notice.
         </p>
 
@@ -381,9 +381,9 @@ export default function LandingPage() {
         <div className="max-w-4xl mx-auto flex items-center justify-between text-xs" style={{ color: 'var(--muted-foreground)' }}>
           <div className="flex items-center gap-2">
             <Activity className="w-3.5 h-3.5" style={{ color: 'var(--primary)' }} />
-            <span className="font-semibold" style={{ color: 'var(--foreground)' }}>CronPulse</span>
+            <span className="font-semibold" style={{ color: 'var(--foreground)' }}>PingCron</span>
           </div>
-          <p>&copy; {new Date().getFullYear()} CronPulse</p>
+          <p>&copy; {new Date().getFullYear()} PingCron</p>
         </div>
       </footer>
     </div>

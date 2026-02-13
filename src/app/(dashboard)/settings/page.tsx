@@ -16,7 +16,7 @@ export default function SettingsPage() {
   }, []);
 
   const copyKey = () => {
-    const key = localStorage.getItem("cronpulse_api_key");
+    const key = localStorage.getItem("pingcron_api_key");
     if (key) {
       navigator.clipboard.writeText(key);
       setCopied(true);
