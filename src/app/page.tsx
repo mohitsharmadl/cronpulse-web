@@ -83,6 +83,22 @@ const tiers = [
     cta: "Start Pro Trial",
     highlighted: true,
   },
+  {
+    name: "Business",
+    price: "$29",
+    period: "/mo",
+    features: [
+      "200 monitors",
+      "10s minimum interval",
+      "1 year ping history",
+      "Unlimited alert channels",
+      "10 status pages",
+      "Unlimited incident history",
+      "Priority support",
+    ],
+    cta: "Start Business Trial",
+    highlighted: false,
+  },
 ];
 
 export default function LandingPage() {
@@ -286,7 +302,7 @@ export default function LandingPage() {
         <p className="text-center mb-14 text-sm" style={{ color: 'var(--muted-foreground)' }}>
           Start free. Upgrade when you outgrow it.
         </p>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-2xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
           {tiers.map((tier) => (
             <div
               key={tier.name}
