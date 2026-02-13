@@ -36,7 +36,7 @@ export default function DashboardLayout({
     <div className="flex h-screen" style={{ background: 'var(--background)' }}>
       <Sidebar />
       <main className="flex-1 overflow-auto">
-        <div className="p-8 max-w-5xl">{children}</div>
+        <div className="pt-16 md:pt-0 p-4 md:p-8 max-w-5xl">{children}</div>
       </main>
     </div>
   );

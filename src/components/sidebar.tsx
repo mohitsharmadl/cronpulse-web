@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
+import { useState, useEffect } from "react";
 import {
   LayoutDashboard,
   Monitor,
@@ -12,6 +13,8 @@ import {
   Settings,
   LogOut,
   Activity,
+  Menu,
+  X,
 } from "lucide-react";
 
 const navItems = [
@@ -23,7 +26,7 @@ const navItems = [
   { href: "/settings", label: "Settings", icon: Settings },
 ];
 
-export function Sidebar() {
+function SidebarContent({ onNavigate }: { onNavigate?: () => void }) {
   const pathname = usePathname();
 
   const handleLogout = () => {
@@ -32,15 +35,15 @@ export function Sidebar() {
   };
 
   return (
-    <aside className="w-60 h-screen flex flex-col" style={{ background: 'var(--sidebar)', color: 'var(--sidebar-foreground)' }}>
+    <>
       {/* Logo */}
       <div className="px-5 py-5" style={{ borderBottom: '1px solid var(--sidebar-border)' }}>
-        <Link href="/dashboard" className="flex items-center gap-2.5">
+        <Link href="/dashboard" className="flex items-center gap-2.5" onClick={onNavigate}>
           <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ background: 'var(--primary)' }}>
             <Activity className="w-4.5 h-4.5 text-white" />
           </div>
           <div>
-            <span className="font-bold text-[15px] tracking-tight text-white">CronPulse</span>
+            <span className="font-bold text-[15px] tracking-tight text-white">PingCron</span>
             <span className="block text-[10px] tracking-widest uppercase" style={{ color: 'var(--primary)' }}>MONITORING</span>
           </div>
         </Link>
@@ -59,6 +62,7 @@ export function Sidebar() {
             <Link
               key={item.href}
               href={item.href}
+              onClick={onNavigate}
               className={cn(
                 "flex items-center gap-2.5 px-3 py-2 rounded-lg text-[13px] font-medium transition-all duration-150",
                 isActive
@@ -92,6 +96,74 @@ export function Sidebar() {
           Log Out
         </button>
       </div>
-    </aside>
+    </>
+  );
+}
+
+export function Sidebar() {
+  const [open, setOpen] = useState(false);
+  const pathname = usePathname();
+
+  // Close drawer on route change
+  useEffect(() => {
+    setOpen(false);
+  }, [pathname]);
+
+  // Prevent body scroll when drawer is open
+  useEffect(() => {
+    if (open) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => { document.body.style.overflow = ""; };
+  }, [open]);
+
+  return (
+    <>
+      {/* Mobile top bar */}
+      <div
+        className="md:hidden fixed top-0 left-0 right-0 z-40 flex items-center justify-between px-4 py-3"
+        style={{ background: 'var(--sidebar)', borderBottom: '1px solid var(--sidebar-border)' }}
+      >
+        <Link href="/dashboard" className="flex items-center gap-2">
+          <div className="w-7 h-7 rounded-lg flex items-center justify-center" style={{ background: 'var(--primary)' }}>
+            <Activity className="w-3.5 h-3.5 text-white" />
+          </div>
+          <span className="font-bold text-sm text-white">PingCron</span>
+        </Link>
+        <button
+          onClick={() => setOpen(!open)}
+          className="p-1.5 rounded-lg transition-colors"
+          style={{ color: 'var(--sidebar-foreground)' }}
+        >
+          {open ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+        </button>
+      </div>
+
+      {/* Mobile overlay */}
+      {open && (
+        <div
+          className="md:hidden fixed inset-0 z-40 bg-black/50"
+          onClick={() => setOpen(false)}
+        />
+      )}
+
+      {/* Mobile slide-out drawer */}
+      <aside
+        className={cn(
+          "md:hidden fixed top-0 left-0 z-50 h-screen w-64 flex flex-col transition-transform duration-200 ease-out",
+          open ? "translate-x-0" : "-translate-x-full"
+        )}
+        style={{ background: 'var(--sidebar)', color: 'var(--sidebar-foreground)' }}
+      >
+        <SidebarContent onNavigate={() => setOpen(false)} />
+      </aside>
+
+      {/* Desktop sidebar */}
+      <aside className="hidden md:flex w-60 h-screen flex-col flex-shrink-0" style={{ background: 'var(--sidebar)', color: 'var(--sidebar-foreground)' }}>
+        <SidebarContent />
+      </aside>
+    </>
   );
 }
