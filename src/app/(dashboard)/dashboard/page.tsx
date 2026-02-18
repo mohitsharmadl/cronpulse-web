@@ -46,10 +46,10 @@ export default function DashboardPage() {
       {/* Header */}
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h1 className="text-2xl font-bold tracking-tight" style={{ color: 'var(--foreground)' }}>
+          <h1 className="text-3xl font-bold tracking-tight" style={{ color: 'var(--foreground)' }}>
             Dashboard
           </h1>
-          <p className="text-sm mt-1" style={{ color: 'var(--muted-foreground)' }}>
+          <p className="text-base mt-1" style={{ color: 'var(--muted-foreground)' }}>
             Monitor your cron jobs in real time
           </p>
         </div>
@@ -80,16 +80,16 @@ export default function DashboardPage() {
           return (
             <div
               key={stat.label}
-              className="rounded-xl border p-4"
+              className="rounded-xl border p-5"
               style={{ background: 'var(--card)', borderColor: 'var(--border)' }}
             >
               <div className="flex items-center justify-between mb-2">
-                <span className="text-[11px] font-medium uppercase tracking-wider" style={{ color: 'var(--muted-foreground)' }}>
+                <span className="text-xs font-medium uppercase tracking-wider" style={{ color: 'var(--muted-foreground)' }}>
                   {stat.label}
                 </span>
-                <Icon className="w-4 h-4" style={{ color: stat.color }} />
+                <Icon className="w-5 h-5" style={{ color: stat.color }} />
               </div>
-              <div className="text-2xl font-bold" style={{ color: 'var(--foreground)' }}>
+              <div className="text-3xl font-bold" style={{ color: 'var(--foreground)' }}>
                 {stat.value}
               </div>
             </div>

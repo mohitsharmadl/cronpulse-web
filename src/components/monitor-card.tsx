@@ -34,14 +34,14 @@ export function MonitorCard({ monitor }: { monitor: Monitor }) {
         {/* Header */}
         <div className="flex items-start justify-between mb-4">
           <div className="flex-1 min-w-0">
-            <h3 className="font-semibold text-sm truncate" style={{ color: 'var(--foreground)' }}>
+            <h3 className="font-semibold text-base truncate" style={{ color: 'var(--foreground)' }}>
               {monitor.name}
             </h3>
-            <span className="text-[11px] font-mono" style={{ color: 'var(--muted-foreground)' }}>
+            <span className="text-xs font-mono" style={{ color: 'var(--muted-foreground)' }}>
               /{monitor.slug}
             </span>
           </div>
-          <div className={`flex items-center gap-1.5 px-2 py-1 rounded-full text-[11px] font-medium ${config.bg} ${config.border} border`}>
+          <div className={`flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium ${config.bg} ${config.border} border`}>
             <div className={`w-1.5 h-1.5 rounded-full ${config.dot}`}>
               {monitor.status === "up" && (
                 <div className={`w-1.5 h-1.5 rounded-full ${config.dot} animate-ping`} />
@@ -54,18 +54,18 @@ export function MonitorCard({ monitor }: { monitor: Monitor }) {
         {/* Stats */}
         <div className="grid grid-cols-2 gap-3 mb-4">
           <div className="rounded-lg p-2.5" style={{ background: 'var(--muted)' }}>
-            <div className="text-[10px] font-medium uppercase tracking-wider" style={{ color: 'var(--muted-foreground)' }}>
+            <div className="text-[11px] font-medium uppercase tracking-wider" style={{ color: 'var(--muted-foreground)' }}>
               Schedule
             </div>
-            <div className="text-xs font-semibold mt-0.5 font-mono" style={{ color: 'var(--foreground)' }}>
+            <div className="text-sm font-semibold mt-0.5 font-mono" style={{ color: 'var(--foreground)' }}>
               {monitor.schedule}
             </div>
           </div>
           <div className="rounded-lg p-2.5" style={{ background: 'var(--muted)' }}>
-            <div className="text-[10px] font-medium uppercase tracking-wider" style={{ color: 'var(--muted-foreground)' }}>
+            <div className="text-[11px] font-medium uppercase tracking-wider" style={{ color: 'var(--muted-foreground)' }}>
               Last Ping
             </div>
-            <div className="text-xs font-semibold mt-0.5" style={{ color: 'var(--foreground)' }}>
+            <div className="text-sm font-semibold mt-0.5" style={{ color: 'var(--foreground)' }}>
               {timeAgo(monitor.last_ping_at)}
             </div>
           </div>
@@ -73,7 +73,7 @@ export function MonitorCard({ monitor }: { monitor: Monitor }) {
 
         {/* Ping URL */}
         <div className="flex items-center gap-1.5 rounded-lg p-2" style={{ background: 'var(--muted)' }}>
-          <code className="text-[10px] flex-1 truncate font-mono" style={{ color: 'var(--muted-foreground)' }}>
+          <code className="text-xs flex-1 truncate font-mono" style={{ color: 'var(--muted-foreground)' }}>
             {monitor.ping_url}
           </code>
           <button
